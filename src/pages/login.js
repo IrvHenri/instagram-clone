@@ -1,10 +1,11 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import * as ROUTES from "../constants/routes";
 import logo from "../images/logo.png";
 import iphone from "../images/iphone-with-profile.jpg";
 import FirebaseContext from "../context/firebase";
 export default function Login() {
+  const history = useHistory();
   const { firebase } = useContext(FirebaseContext);
 
   const [emailAddress, setEmailAddress] = useState("");
@@ -20,6 +21,7 @@ export default function Login() {
     e.preventDefault();
     try {
       await firebase.auth().signInWithEmailAndPassword(emailAddress, password);
+      history.push(ROUTES.DASHBOARD);
     } catch (err) {
       console.log(err.message);
       setError(err.message);
