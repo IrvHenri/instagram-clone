@@ -70,7 +70,7 @@ export default function Login() {
         </div>
         <div className="flex justify-center items-center flex-col w-full bg-white p-4 border">
           <p className="text-sm">
-            Don't have an account?
+            Don't have an account?{" "}
             <Link to={ROUTES.SIGN_UP} className="font-bold">
               Sign up
             </Link>
