@@ -1,17 +1,32 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import * as ROUTES from "../constants/routes";
 import logo from "../images/logo.png";
 import iphone from "../images/iphone-with-profile.jpg";
+import FirebaseContext from "../context/firebase";
 export default function Login() {
+  const { firebase } = useContext(FirebaseContext);
+
   const [emailAddress, setEmailAddress] = useState("");
   const [password, setPassword] = useState("");
-  console.log(emailAddress);
+
   const [error, setError] = useState("");
   const isInvalid = password === "" || emailAddress === "";
   useEffect(() => {
     document.title = "Login - Instagram";
   }, []);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await firebase.auth().signInWithEmailAndPassword(emailAddress, password);
+    } catch (err) {
+      console.log(err.message);
+      setError(err.message);
+      setEmailAddress("");
+      setPassword("");
+    }
+  };
   return (
     <div className="container flex mx-auto max-w-screen-md items-center h-screen ">
       <div className="flex w-3/5">
@@ -22,7 +37,8 @@ export default function Login() {
           <h1 className="flex justify-center w-full">
             <img src={logo} alt="Instagram" className="mt-2 w-6/12 mb-4" />
           </h1>
-          <form method="POST">
+          {error && <p className="mb-4 text-xs text-red-500">{error}</p>}
+          <form method="POST" onSubmit={handleSubmit}>
             <input
               aria-label="Enter your email address"
               className="text-sm w-full mr-3 py-5 px-4 h-2 border rounded mb-2"
