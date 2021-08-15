@@ -1,4 +1,4 @@
-import { seedDatabase } from "../seed";
+// import { seedDatabase } from "../seed";
 
 const config = {
   apiKey: "AIzaSyAOAaJao9eW2u98TQjOSodDei9J7bKHoBA",
