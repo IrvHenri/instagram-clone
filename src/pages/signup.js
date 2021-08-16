@@ -11,6 +11,9 @@ export default function SignUp() {
   });
 
   const [error, setError] = useState("");
+  const { username, fullName, email, password } = state;
+  const isInvalid =
+    username === "" || fullName === "" || password === "" || email === "";
   useEffect(() => {
     document.title = "Sign Up - Instagram";
   }, []);
@@ -78,8 +81,11 @@ export default function SignUp() {
               value={state.password}
             />
             <button
+              disabled={isInvalid}
               type="submit"
-              className={`bg-blue-500 text-white w-full rounded h-8 font-bold`}
+              className={`bg-blue-500 text-white w-full rounded h-8 font-bold ${
+                isInvalid && "cursor-not-allowed opacity-50"
+              }`}
             >
               Sign Up
             </button>
