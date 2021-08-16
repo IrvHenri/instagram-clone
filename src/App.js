@@ -17,7 +17,7 @@ export default function App() {
           <Route path={ROUTES.SIGN_UP} component={SignUp} />
           <Route path={ROUTES.PROFILE} component={Profile} />
           <Route path={ROUTES.DASHBOARD} component={Dashboard} exact />
-          <Route path={ROUTES.NOT_FOUND} component={NotFound} />
+          <Route component={NotFound} />
         </Switch>
       </Suspense>
     </Router>
