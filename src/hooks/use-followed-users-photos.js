@@ -2,7 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import { getUserByUserId, getUserFollowedPhotos } from "../services/firebase";
 import UserContext from "../context/user";
 
-export default async function useFollowedUsersPhotos() {
+export default function useFollowedUsersPhotos() {
   const [photos, setPhotos] = useState(null);
   const {
     user: { uid: userId = "" },
@@ -25,5 +25,6 @@ export default async function useFollowedUsersPhotos() {
 
     getTimelinePhotos();
   }, [userId]);
+
   return { photos };
 }
