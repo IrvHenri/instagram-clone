@@ -2,11 +2,11 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import * as ROUTES from "../constants/routes";
 import FirebaseContext from "../context/firebase";
+import UserContext from "../context/user";
 export default function Header() {
   const { firebase } = useContext(FirebaseContext);
-  const user = {
-    displayName: "raphael",
-  };
+  const { user } = useContext(UserContext);
+
   return (
     <header className="h-16 bg-white border-b mb-8">
       <div className="container mx-auto max-width-lg h-full">
@@ -34,9 +34,9 @@ export default function Header() {
                     stroke="currentColor"
                   >
                     <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
                       d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
                     />
                   </svg>
@@ -59,9 +59,9 @@ export default function Header() {
                     stroke="currentColor"
                   >
                     <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
                       d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
                     />
                   </svg>
@@ -71,7 +71,7 @@ export default function Header() {
                     <img
                       className="rounded-full h-8 w-8 flex"
                       src={`/images/avatars/${user.displayName}.jpg`}
-                      alt={`${user.displayName} profile picture`}
+                      alt={`${user.displayName} profile `}
                     />
                   </Link>
                 </div>
