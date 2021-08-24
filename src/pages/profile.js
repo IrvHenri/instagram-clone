@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import Header from "../components/header";
+import Header from "../components/header.js";
 import UserProfile from "../components/proflile";
 import { getUserByUsername } from "../services/firebase";
 import * as ROUTES from "../constants/routes";

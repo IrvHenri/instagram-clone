@@ -94,4 +94,17 @@ export async function updateFollowedUserFollowers(
     });
 }
 
-export async function getUserByUsername() {}
+export async function getUserByUsername(username) {
+  let result = await firebase
+    .firestore()
+    .collection("users")
+    .where("username", "==", username)
+    .get();
+  const user = result.docs.map((item) => ({
+    ...item.data(),
+    docId: item.id,
+  }));
+
+  console.log(user);
+  return user.length > 0 ? user : false;
+}
