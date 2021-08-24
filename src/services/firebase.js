@@ -95,16 +95,44 @@ export async function updateFollowedUserFollowers(
 }
 
 export async function getUserByUsername(username) {
-  let result = await firebase
+  const result = await firebase
     .firestore()
     .collection("users")
     .where("username", "==", username)
     .get();
+
   const user = result.docs.map((item) => ({
     ...item.data(),
     docId: item.id,
   }));
 
-  console.log(user);
   return user.length > 0 ? user : false;
+}
+
+export async function getUserIdByUsername(username) {
+  const result = await firebase
+    .firestore()
+    .collection("users")
+    .where("username", "==", username)
+    .get();
+
+  const [{ userId = null }] = result.docs.map((item) => ({
+    ...item.data(),
+  }));
+  return userId;
+}
+export async function getUserPhotosByUsername(username) {
+  const userId = await getUserIdByUsername(username);
+  const result = await firebase
+    .firestore()
+    .collection("photos")
+    .where("userId", "==", userId)
+    .get();
+  console.log(userId);
+  const photos = result.docs.map((item) => ({
+    ...item.data(),
+    docId: item.id,
+  }));
+
+  return photos;
 }

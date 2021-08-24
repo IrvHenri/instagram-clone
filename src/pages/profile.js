@@ -13,6 +13,7 @@ export default function Profile() {
   useEffect(() => {
     async function checkUserExistsToLoadProfile() {
       const doesUserExist = await getUserByUsername(username);
+
       if (!doesUserExist) {
         history.push(ROUTES.NOT_FOUND);
       } else {
