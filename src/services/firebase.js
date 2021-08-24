@@ -93,3 +93,5 @@ export async function updateFollowedUserFollowers(
         : FieldValue.arrayUnion(followingUserId),
     });
 }
+
+export async function getUserByUsername() {}
