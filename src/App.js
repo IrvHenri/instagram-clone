@@ -7,6 +7,7 @@ import ProtectedRoute from "./helpers/protected-route";
 import UserContext from "./context/user";
 import useAuthListener from "./hooks/use-auth-listener";
 
+// git config test
 const Dashboard = lazy(() => import("./pages/dashboard"));
 const Login = lazy(() => import("./pages/login"));
 const SignUp = lazy(() => import("./pages/signup"));
