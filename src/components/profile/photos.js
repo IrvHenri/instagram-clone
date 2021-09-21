@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import Photo from "./photo";
 import Modal from "react-modal";
+import Header from "../post/header";
 
 // Modal Styles
 
@@ -13,26 +14,28 @@ const customStyles = {
     bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
+    padding: "0",
   },
 };
 
 Modal.setAppElement("#root");
 
-export default function Photos({ photos }) {
+export default function Photos({ photos, username }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentPhotoInfo, setCurrentPhotoInfo] = useState({
     imageSrc: null,
     caption: "",
     comments: [],
   });
+
   function openModal(id) {
     // filter photos with id, get image source
     let photoInfo = photos.filter((photo) => photo.docId === id)[0];
+    console.log("PHOTO INFO ->", photoInfo);
     const { imageSrc, caption, comments } = photoInfo;
-    // console.log(imageSrc);
-    // console.log(caption);
+
     setCurrentPhotoInfo((prev) => ({ ...prev, imageSrc, caption, comments }));
-    console.log(currentPhotoInfo);
+
     setIsModalOpen(true);
   }
 
@@ -66,8 +69,7 @@ export default function Photos({ photos }) {
           ))
         ) : null}
       </div>
-      <div className="relative group">
-        <button onClick={openModal}>Open Modal</button>
+      <div>
         <Modal
           isOpen={isModalOpen}
           onAfterOpen={afterOpenModal}
@@ -75,8 +77,18 @@ export default function Photos({ photos }) {
           style={customStyles}
           contentLabel="Instagram Modal"
         >
-          <img src={currentPhotoInfo.imageSrc} alt={currentPhotoInfo.caption} />
-          ;<button onClick={closeModal}>X</button>
+          <article className="flex">
+            <img
+              src={currentPhotoInfo.imageSrc}
+              alt={currentPhotoInfo.caption}
+              className="w-6/12"
+            />
+            <aside className="rounded col-span-4 border bg-white mb-16 w-6/12">
+              <Header username={username} />
+            </aside>
+          </article>
+
+          {/* <button onClick={closeModal}>X</button> */}
         </Modal>
       </div>
 

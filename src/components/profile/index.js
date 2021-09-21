@@ -23,7 +23,6 @@ export default function Profile({ username }) {
     async function getProfileInfoAndPhotos() {
       const [{ ...user }] = await getUserByUsername(username);
       const photos = await getUserPhotosByUsername(username);
-
       dispatch({
         profile: user,
         photosCollection: photos,
@@ -32,7 +31,6 @@ export default function Profile({ username }) {
     }
     getProfileInfoAndPhotos();
   }, [username]);
-
   return (
     <>
       <Header
@@ -42,7 +40,7 @@ export default function Profile({ username }) {
         setFollowerCount={dispatch}
         username={username}
       />
-      <Photos photos={photosCollection} />
+      <Photos photos={photosCollection} username={profile?.username} />
     </>
   );
 }
