@@ -50,7 +50,7 @@ A react Instagram clone with firestore database storage.
 <li>react-loading-skeleton</li>
 <li>react-modal</li>
 <li>react-router-dom</li>
-<li>"react-router-dom"</li>
+<li>react-router-dom</li>
 
 
 
