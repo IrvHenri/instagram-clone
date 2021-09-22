@@ -31,7 +31,7 @@ export default function Photos({ photos, username }) {
   function openModal(id) {
     // filter photos with id, get image source
     let photoInfo = photos.filter((photo) => photo.docId === id)[0];
-    console.log("PHOTO INFO ->", photoInfo);
+
     const { imageSrc, caption, comments } = photoInfo;
 
     setCurrentPhotoInfo((prev) => ({ ...prev, imageSrc, caption, comments }));
