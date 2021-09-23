@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import Photo from "./photo";
 import Modal from "react-modal";
-import Header from "../post/header";
+// import Header from "../post/header";
+import ModalPhotoPost from "./modalPhotoPost";
 
 // Modal Styles
-
 const customStyles = {
   content: {
     top: "50%",
@@ -20,24 +21,35 @@ const customStyles = {
 
 Modal.setAppElement("#root");
 
-export default function Photos({ photos, username }) {
+export default function Photos({ photos }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  // const [currentPhotoInfo, setCurrentPhotoInfo] = useState({
+  //   imageSrc: null,
+  //   caption: "",
+  //   comments: [],
+  // });
+  const { username } = useParams();
   const [currentPhotoInfo, setCurrentPhotoInfo] = useState({
-    imageSrc: null,
-    caption: "",
-    comments: [],
+    username,
   });
 
   function openModal(id) {
     // filter photos with id, get image source
     let photoInfo = photos.filter((photo) => photo.docId === id)[0];
 
-    const { imageSrc, caption, comments } = photoInfo;
+    //New  (need username in order to use post component)
+    setCurrentPhotoInfo((prev) => ({ ...prev, ...photoInfo }));
 
-    setCurrentPhotoInfo((prev) => ({ ...prev, imageSrc, caption, comments }));
+    //OLD
+    // const { imageSrc, caption, comments } = photoInfo;
+    // setCurrentPhotoInfo((prev) => ({ ...prev, imageSrc, caption, comments }));
 
     setIsModalOpen(true);
   }
+
+  useEffect(() => {
+    console.log("Inside UseEffect", currentPhotoInfo);
+  }, [currentPhotoInfo]);
 
   function afterOpenModal() {
     // references are now sync'd and can be accessed.
@@ -77,7 +89,7 @@ export default function Photos({ photos, username }) {
           style={customStyles}
           contentLabel="Instagram Modal"
         >
-          <article className="flex">
+          {/* <article className="flex">
             <img
               src={currentPhotoInfo.imageSrc}
               alt={currentPhotoInfo.caption}
@@ -86,9 +98,8 @@ export default function Photos({ photos, username }) {
             <aside className="rounded col-span-4 border bg-white mb-16 w-6/12">
               <Header username={username} />
             </aside>
-          </article>
-
-          {/* <button onClick={closeModal}>X</button> */}
+          </article> */}
+          <ModalPhotoPost content={currentPhotoInfo} />
         </Modal>
       </div>
 
