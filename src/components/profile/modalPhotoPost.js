@@ -1,7 +1,6 @@
 import React, { useRef } from "react";
 import Header from "../post/header";
 import Image from "../post/image";
-import Footer from "../post/footer";
 import ModalPhotoComments from "./modalPhotoComment";
 
 export default function ModalPhotoPost({ content }) {
