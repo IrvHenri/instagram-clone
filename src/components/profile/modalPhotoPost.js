@@ -13,7 +13,7 @@ export default function ModalPhotoPost({ content }) {
         <Image src={content.imageSrc} caption={content.caption} />
       </div>
 
-      <aside className="w-6/12">
+      <aside className="w-6/12 flex flex-col justify-between">
         <Header username={content.username} />
         <ModalPhotoComments
           docId={content.docId}
