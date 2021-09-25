@@ -8,7 +8,7 @@ export default function ModalPhotoPost({ content }) {
   const handleFocus = () => commentInput.current.focus();
 
   return (
-    <div className="flex">
+    <div className="flex max-w-screen-lg">
       <div className="w-6/12">
         <Image src={content.imageSrc} caption={content.caption} />
       </div>
