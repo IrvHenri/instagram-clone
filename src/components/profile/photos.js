@@ -23,11 +23,6 @@ Modal.setAppElement("#root");
 
 export default function Photos({ photos }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  // const [currentPhotoInfo, setCurrentPhotoInfo] = useState({
-  //   imageSrc: null,
-  //   caption: "",
-  //   comments: [],
-  // });
   const { username } = useParams();
   const [currentPhotoInfo, setCurrentPhotoInfo] = useState({
     username,
@@ -35,21 +30,10 @@ export default function Photos({ photos }) {
 
   function openModal(id) {
     // filter photos with id, get image source
-    let photoInfo = photos.filter((photo) => photo.docId === id)[0];
-
-    //New  (need username in order to use post component)
+    let photoInfo = photos.find((photo) => photo.docId === id);
     setCurrentPhotoInfo((prev) => ({ ...prev, ...photoInfo }));
-
-    //OLD
-    // const { imageSrc, caption, comments } = photoInfo;
-    // setCurrentPhotoInfo((prev) => ({ ...prev, imageSrc, caption, comments }));
-
     setIsModalOpen(true);
   }
-
-  useEffect(() => {
-    console.log("Inside UseEffect", currentPhotoInfo);
-  }, [currentPhotoInfo]);
 
   function afterOpenModal() {
     // references are now sync'd and can be accessed.
@@ -89,16 +73,6 @@ export default function Photos({ photos }) {
           style={customStyles}
           contentLabel="Instagram Modal"
         >
-          {/* <article className="flex">
-            <img
-              src={currentPhotoInfo.imageSrc}
-              alt={currentPhotoInfo.caption}
-              className="w-6/12"
-            />
-            <aside className="rounded col-span-4 border bg-white mb-16 w-6/12">
-              <Header username={username} />
-            </aside>
-          </article> */}
           <ModalPhotoPost content={currentPhotoInfo} />
         </Modal>
       </div>

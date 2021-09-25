@@ -15,6 +15,7 @@ const ModalPhotoComments = ({
 }) => {
   const [comments, setComments] = useState(allComments);
   let reversedComments = [...comments].reverse();
+  console.log({ comments });
   return (
     <div className="p-4 pt-1 pb-4 h-full flex flex-col justify-between	">
       <section className="">

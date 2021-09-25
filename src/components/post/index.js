@@ -8,7 +8,7 @@ import Comments from "./comments";
 export default function Post({ content }) {
   const commentInput = useRef(null);
   const handleFocus = () => commentInput.current.focus();
-  console.log("Post Component Photo Content ->", content);
+
   return (
     <div className="rounded col-span-4 border bg-white mb-16">
       <Header username={content.username} />
